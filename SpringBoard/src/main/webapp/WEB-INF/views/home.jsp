@@ -2,13 +2,12 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
-</head>
-<body>
+<%@ include file="include/header.jsp"%>
+
 <h1>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-</body>
-</html>
+
+<%@ include file="include/footer.jsp"%>
