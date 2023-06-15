@@ -16,28 +16,30 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(
 		locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"}
 		)
-
 public class DataSourceTest {
 	
 	
 	// DataSource 객체를 주입
 	@Inject
 	private DataSource ds;
-
+	
+	// SqlSession 객체 주입
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(DataSourceTest.class);
 	
-//	@Test
+	@Test
 	public void DS_ConnectTest() {
 		logger.debug("ds : "+ds);
 	}
 	
 	@Test
 	public void CPTest() {
-		logger.debug("sqlSession : "+sqlSession);
+		logger.debug("@@@@ sqlSession : 	"+sqlSession);
 	}
+	
+	
 	
 	
 

@@ -1,51 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-<html>
-<head>
+
 <%@ include file="../include/header.jsp"%>
 
+<!-- 본문 내용 작성 -->
 
-<!-- http://localhost:8088/board/regist -->
+<h1>http://localhost:8088/board/regist 호출</h1>
+<h1>/board/regist.jsp</h1>
 
-<!-- 	본문내용 작성 -->
-
-<!-- <h1>regist.jsp</h1> -->
-<%-- <P>The time on the server is ${serverTime}.</P> --%>
-
-
-
-	<div class="box box-primary">
-		<div class="box-header with-border">
-			<h3 class="box-title">ITWILL 게시판 글쓰기</h3>
-		</div>
-		
-		<form role="form">
-			<div class="box-body">
-				<div class="form-group">
-					<label for="title">제목</label> 
-					<input
-						type="text" class="form-control" id="title"
-						placeholder="제목을 입력하세요">
-				</div>
-				<div class="form-group">
-					<label for="name">이름</label> 
-					<input
-						type="text" class="form-control" id="name"
-						placeholder="이름을 입력하세요">
-				</div>
-					<div class="form-group">
-					<label>내용</label>
-					<textarea class="form-control" rows="3" placeholder="내용을 입력하세요"></textarea>
-					</div>
-				
-			<div class="box-footer">
-				<button type="submit" class="btn btn-success">Submit</button>
-			</div>
-		</form>
+<div class="box box-primary">
+	<div class="box-header with-border">
+		<h3 class="box-title">ITWILL 게시판 글쓰기</h3>
 	</div>
 
-<!-- 본문내용 작성 -->
+	<!-- /board/regist (post) -->
+	<form role="form" method="post">
+		<div class="box-body">
+			<div class="form-group">
+				<label for="exampleInputEmail1">제  목</label>
+				 <input	type="text" name="title" class="form-control" id="exampleInputEmail1"
+					placeholder="제목을 입력하세요">
+			</div>
+			
+			<div class="form-group">
+				<label for="exampleInputPassword1">이  름</label>
+				<input type="text" name="writer" class="form-control" id="exampleInputPassword1"
+					placeholder="이름을 입력하세요">
+			</div>
+			
+			<div class="form-group">
+				<label>내  용</label>
+				<textarea class="form-control" name="content" rows="3" placeholder="Enter ..."></textarea>
+			</div>
+		
+		</div>
+		
+
+		<div class="box-footer">
+			<button type="submit" class="btn btn-success">글쓰기</button>
+		</div>
+	</form>
+</div>
+
+<!-- 본문 내용 작성 -->
 
 <%@ include file="../include/footer.jsp"%>
