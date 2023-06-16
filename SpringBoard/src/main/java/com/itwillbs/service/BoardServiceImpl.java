@@ -26,6 +26,18 @@ public class BoardServiceImpl implements BoardService {
 		// DAO-글목록 가져오는 동작
 		return bdao.readBoardListAll();
 	}
+
+	@Override
+	public void upViewcnt(Integer bno) throws Exception {
+		bdao.updateViewcnt(bno);
+	}
+
+	@Override
+	public BoardVO getBoard(Integer bno) throws Exception {
+		return bdao.readBoard(bno);
+	}
+	
+	
 	
 	
 
