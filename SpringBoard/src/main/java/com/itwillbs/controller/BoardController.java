@@ -84,7 +84,9 @@ public class BoardController {
 	// http://localhost:8088/board/read?bno=6
 	// 글 내용(본문)보기
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
-	public void readGET(Model model,HttpSession session,@RequestParam("bno") int bno/* ,@ModelAttribute BoardVO vo */) throws Exception{
+	public void readGET(Model model,
+						HttpSession session,
+						@RequestParam("bno") int bno/* ,@ModelAttribute BoardVO vo */) throws Exception{
 		// @RequestParam => getParameter() , 1:1 매핑 , 자동으로 타입케스팅(형변환)
 		// @ModelAttribute =>  getParameter() + Model, 1:N 매핑
 		logger.debug(" readGET() 호출 ");
@@ -103,13 +105,30 @@ public class BoardController {
 		}
 		
 		// 글정보 조회(특정글)
-		service.getBoard(bno);
 		// 글정보를 Model 저장 => 연결된 뷰페이지로 전달
-		model.addAttribute("vo",service.getBoard(bno));
+		model.addAttribute("vo", service.getBoard(bno));
+		//model.addAttribute(service.getBoard(bno));
+		// => 호출하는 이름 : boardVO
+		//     전달하는 key(이름)이 없는 경우
+		//     전달된는 객체의 타입의 첫글자를 소문자로 변경해서 이름으로 사용
 		
 		// 뷰페이지로 이동	(/board/read.jsp)	
 	}
 	
+	
+	// http://localhost:8088/board/modify?bno=6
+	// 글 정보 수정(GET)
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public void updateBoardGET(Model model,@RequestParam("bno") int bno) throws Exception{
+		logger.debug("updateBoardGET() 호출");
+		logger.debug("bno : "+bno);
+		//전달정보 저장(bno)
+		
+		//서비스 - 특정 글정보 가져오기
+		
+		// Model 저장해서 연결된 뷰페이지로 전달
+		
+	}
 	
 	
 	

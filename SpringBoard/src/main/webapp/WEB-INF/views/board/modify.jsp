@@ -16,9 +16,9 @@
 	</div>
 		
 		<!-- 수정(get-post)/삭제(post) 정보 전달용 -->
-		<form role="form" id="fr">
+	<form role="form" id="fr">	
 			<input type="hidden" name="bno" value="${vo.bno }">
-		</form>
+		
 
 		<div class="box-body">
 			<div class="form-group">
@@ -29,19 +29,19 @@
 			<div class="form-group">
 				<label for="exampleInputEmail1">제  목</label>
 				 <input	type="text" name="title" class="form-control" id="exampleInputEmail1"
-					readonly value="${vo.title }">
+					 value="${vo.title }">
 			</div>
 			
 			<div class="form-group">
 				<label for="exampleInputPassword1">이  름</label>
 				<input type="text" name="writer" class="form-control" id="exampleInputPassword1"
-					readonly value="${vo.writer }">
+					 value="${vo.writer }">
 			</div>
 			
 			<div class="form-group">
 				<label>내  용</label>
 				<textarea class="form-control" name="content" 
-				rows="3" readonly>${vo.content }</textarea>
+				rows="3" >${vo.content }</textarea>
 			</div>
 		
 		</div>
@@ -51,35 +51,12 @@
 		<!-- 	<button type="button" class="btn btn-success"  
 			         onclick=" location.href='/board/listALL';"
 			>목록으로</button> -->
-			<button type="button" class="btn btn-danger">수정하기</button>
-			<button type="button" class="btn btn-warning">삭제하기</button>
-			<button type="button" class="btn btn-success">목록으로</button>
+			<button type="submit" class="btn btn-danger">수정하기</button>
+			<button type="reset" class="btn btn-warning">취소하기</button>
 		</div>
 </div>
 
-	<script>
-		$(document).ready(function(){
-			
-			$(".btn-success").click(function(){
-				location.href='/board/listALL';
-				frObj.attr("action","/board/modify");
-				frObj.submit();
-			});
-			
-			$(".btn-warning").click(function(){
-				location.href='/board/listALL';
-			});
-			
-			$(".btn-danger").click(function(){
-				location.href='/board/modify?bno=${vo.bno}';
-				
-			});
-			
-// 			$("#fr");
-			var frObj = $("form[role='form']");
-// 			console.log(frObj);
-		});
-	</script>
+		</form>
 
 
 <!-- 본문 내용 작성 -->
