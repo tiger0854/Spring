@@ -119,16 +119,51 @@ public class BoardController {
 	// http://localhost:8088/board/modify?bno=6
 	// 글 정보 수정(GET)
 	@RequestMapping(value = "/modify",method = RequestMethod.GET)
-	public void updateBoardGET(Model model,@RequestParam("bno") int bno) throws Exception{
-		logger.debug("updateBoardGET() 호출");
-		logger.debug("bno : "+bno);
-		//전달정보 저장(bno)
+	public void updateBoardGET(Model model, @RequestParam("bno") int bno ) throws Exception{
+		logger.debug(" updateBoardGET() 호출 ");
+		// 전달정보 저장(bno)
+		logger.debug(" bno : "+bno);
 		
-		//서비스 - 특정 글정보 가져오기
-		
+		// 서비스 - 특정 글정보 가져오기
 		// Model 저장해서 연결된 뷰페이지로 전달
-		
+		model.addAttribute("vo", service.getBoard(bno) ); 
+		//  /board/modifiy.jsp (read.jsp 참조)
 	}
+	
+	
+	// 글 정보 수정(POST)
+	@RequestMapping(value = "/modify",method = RequestMethod.POST )
+	public String updateBoardPOST(RedirectAttributes rttr,
+			                 /* @ModelAttribute */ BoardVO uvo) throws Exception{
+		logger.debug(" updateBoardPOST() 호출 ");
+		// 전달된 정보 저장(수정할 데이터)
+		logger.debug("uvo : "+uvo);
+		// 서비스 - 디비에 게시판 글내용 수정 동작
+		service.modifyBoard(uvo);	
+		// 상태정보 전달
+		rttr.addFlashAttribute("result", "MODOK");
+		// 페이지로 이동(리스트)
+		return "redirect:/board/listALL";
+	}
+	
+	
+	// 글 정보 삭제 
+	@RequestMapping(value = "/remove",method = RequestMethod.POST)
+	public String removeBoardPOST(RedirectAttributes rttr
+			,@RequestParam("bno") int bno) throws Exception{
+		logger.debug("removeBoardPOST() 호출 ");
+		// 전달정보 저장(bno)
+		logger.debug("bno : "+bno);
+		
+		// 서비스 - 글정보 삭제 동작 호출
+		service.removeBoard(bno);
+		// 상태정보 전달
+		rttr.addFlashAttribute("result","DELOK");
+		
+		// 페이지 이동(리스트)		
+		return "redirect:/board/listALL";
+	}
+	
 	
 	
 	

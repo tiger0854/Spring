@@ -14,11 +14,13 @@
 	<div class="box-header with-border">
 		<h3 class="box-title">ITWILL 게시판 본문(내용)</h3>
 	</div>
-		
-		<!-- 수정(get-post)/삭제(post) 정보 전달용 -->
-		<form role="form" id="fr">
-			<input type="hidden" name="bno" value="${vo.bno }">
-		</form>
+	    
+	    <!-- 수정(get-post)/삭제(post) 정보 전달용 -->
+	    <form role="form" id="fr" >
+	         <input type="hidden" name="bno" value="${vo.bno }">
+	         
+	    </form>
+	
 
 		<div class="box-body">
 			<div class="form-group">
@@ -55,29 +57,40 @@
 			<button type="button" class="btn btn-warning">삭제하기</button>
 			<button type="button" class="btn btn-success">목록으로</button>
 		</div>
+		
+		
+		
 </div>
 
 	<script>
 		$(document).ready(function(){
+			// 폼태그 객체 
+			//$("#fr"); id선택자
+			//console.log($("form[role='form']"));
 			
-			$(".btn-success").click(function(){
-				location.href='/board/listALL';
+			var frObj = $("form[role='form']"); // 속성탐색 선택자
+			
+			// 수정하기 버튼
+			$(".btn-danger").click(function(){
+				//location.href="/board/modify?bno=${vo.bno}";
+				// 폼태그 사용해서 bno가지고, 수정페이지로 이동(GET)
 				frObj.attr("action","/board/modify");
+				frObj.submit();				
+			});
+			
+			// 삭제하기 버튼
+			$(".btn-warning").click(function(){
+				frObj.attr("action","/board/remove");
+				frObj.attr("method","post");
 				frObj.submit();
 			});
 			
-			$(".btn-warning").click(function(){
+			
+			// 목록으로 버튼
+			$(".btn-success").click(function(){
 				location.href='/board/listALL';
 			});
 			
-			$(".btn-danger").click(function(){
-				location.href='/board/modify?bno=${vo.bno}';
-				
-			});
-			
-// 			$("#fr");
-			var frObj = $("form[role='form']");
-// 			console.log(frObj);
 		});
 	</script>
 

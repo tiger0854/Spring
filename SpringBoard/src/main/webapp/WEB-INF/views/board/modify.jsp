@@ -5,25 +5,23 @@
 
 <!-- 본문 내용 작성 -->
 
-<h1>http://localhost:8088/board/read 호출</h1>
-<h1>/board/read.jsp</h1>
+<h1>http://localhost:8088/board/modify 호출</h1>
+<h1>/board/modify.jsp</h1>
 
 <%-- ${vo } --%>
 
 <div class="box box-primary">
 	<div class="box-header with-border">
-		<h3 class="box-title">ITWILL 게시판 본문(내용)</h3>
+		<h3 class="box-title">ITWILL 게시판 수정하기</h3>
 	</div>
-		
-		<!-- 수정(get-post)/삭제(post) 정보 전달용 -->
-	<form role="form" id="fr">	
-			<input type="hidden" name="bno" value="${vo.bno }">
-		
+	    
+	    <!-- 수정(get-post)/삭제(post) 정보 전달용 -->
+	    <form role="form" id="fr" >
 
 		<div class="box-body">
 			<div class="form-group">
 				<label for="exampleInputEmail1">번   호</label>
-				 <input	type="text" name="title" class="form-control" id="exampleInputEmail1"
+				 <input	type="text" name="bno" class="form-control" id="exampleInputEmail1"
 					readonly value="${vo.bno }">
 			</div>
 			<div class="form-group">
@@ -45,19 +43,30 @@
 			</div>
 		
 		</div>
-		
+			         
+	    </form>
 
 		<div class="box-footer">
-		<!-- 	<button type="button" class="btn btn-success"  
-			         onclick=" location.href='/board/listALL';"
-			>목록으로</button> -->
 			<button type="submit" class="btn btn-danger">수정하기</button>
 			<button type="reset" class="btn btn-warning">취소하기</button>
 		</div>
 </div>
 
-		</form>
 
+<script>
+	$(document).ready(function(){
+		var formObj = $("#fr");
+		
+		$(".btn-danger").click(function(){
+			// 수정하기 동작  - modify주소, post방식
+			formObj.attr("method","post");
+			formObj.submit();			
+		});
+		
+	});
+
+
+</script>
 
 <!-- 본문 내용 작성 -->
 

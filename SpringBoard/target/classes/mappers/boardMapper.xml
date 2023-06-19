@@ -22,7 +22,10 @@
 	<!-- 글 목록 조회 -->
 	<select id="listAll" resultType="BoardVO" 
 	        resultMap="board">
-		select * from tbl_board
+	    <![CDATA[    
+		select * from tbl_board 
+		where bno > 0
+		]]>
 	</select>
 	<!-- 글 목록 조회 -->
 	
@@ -40,6 +43,20 @@
 	</select>
 	<!-- 특정 글정보 조회 -->
 	
+	<!-- 특정 글정보 수정 -->
+	<update id="updateBoard">
+	   update tbl_board 
+	   set title=#{title}, writer=#{writer}, content=#{content} 
+	   where bno = #{bno}	
+	</update>	
+	<!-- 특정 글정보 수정 -->
+	
+	<!-- 특정 글정보 삭제 -->
+	<delete id="deleteBoard">
+		delete from tbl_board 
+		where bno = #{bno}
+	</delete>		
+	<!-- 특정 글정보 삭제 -->	
 	
 	
 
