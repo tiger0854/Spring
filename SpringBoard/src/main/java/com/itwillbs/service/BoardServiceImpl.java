@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.persistence.BoardDAO;
 
 @Service
@@ -45,6 +46,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void removeBoard(Integer bno) throws Exception {
 		 bdao.deleteBoard(bno);
+	}
+
+	@Override
+	public List<BoardVO> getBoardListPage(PageVO vo) throws Exception {
+		return bdao.getBoardListPage(vo);
 	}
 	
 	
