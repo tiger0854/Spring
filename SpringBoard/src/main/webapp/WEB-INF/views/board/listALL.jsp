@@ -12,6 +12,10 @@
 		
 	<%-- 	${boardList }		 --%>
 			    <h2> result : ${result }</h2>
+		<hr>
+		 ${pm }
+		<hr>
+		
 		
 		<!-- 모달창  -->
 		<div class="modal modal-info fade" id="modal-info"
@@ -103,9 +107,32 @@
 							</c:forEach>
 						</tbody>
 					</table>
+				</div><!-- div box-body -->
+			
+				<div class="box-footer clearfix">
+					<!-- 페이징처리(하단부) -->
+					<ul class="pagination pagination-sm no-margin pull-right">
+						
+						<c:if test="${pm.prev }">						
+							<li><a href="/board/listPage?page=${pm.startPage-1 }">«</a></li>
+						</c:if>
+						
+						<c:forEach begin="${pm.startPage }" 
+						           end="${pm.endPage}" step="1"
+						           var="idx">						
+							<li  
+							   <c:out value="${pm.pageVO.page == idx? 'class=active':''}"/>
+							>
+								<a href="/board/listPage?page=${idx }">${idx }</a>
+							</li>
+						</c:forEach>
+						
+						<c:if test="${pm.next && pm.endPage > 0 }">
+							<li><a href="/board/listPage?page=${pm.endPage + 1}">»</a></li>
+						</c:if>
+					</ul>
 				</div>
-			
-			
-			</div>
+
+			</div> <!-- div  box -->
 
 <%@ include file="../include/footer.jsp" %>

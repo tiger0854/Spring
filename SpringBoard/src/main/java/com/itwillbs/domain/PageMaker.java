@@ -32,16 +32,16 @@ public class PageMaker {
 		
 		endPage 
 		 	= (int)(Math.ceil(pageVO.getPage()/(double)pageBlock) * pageBlock);
-
+		
+		startPage
+		  = (endPage - pageBlock) + 1;
+		
 		int tmpEndPage 
-			= (int)(Math.ceil(totalCount / (double)pageVO.getPageSize()));
+		= (int)(Math.ceil(totalCount / (double)pageVO.getPageSize()));
 		
 		if(endPage > tmpEndPage) {
 			endPage = tmpEndPage;
 		}
-				
-		startPage
-		  = (endPage - pageBlock) + 1;
 		
 		//prev = (startPage == 1)? false : true;
 		prev = startPage != 1;
@@ -50,7 +50,6 @@ public class PageMaker {
 		
 		// 페이징처리 하단 필요한 정보 계산 - 끝 
 	}
-	
 	
 	
 		
@@ -104,6 +103,7 @@ public class PageMaker {
 		this.pageBlock = pageBlock;
 	}
 
+	
 	
 	@Override
 	public String toString() {

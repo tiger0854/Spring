@@ -18,6 +18,7 @@
 	    <!-- 수정(get-post)/삭제(post) 정보 전달용 -->
 	    <form role="form" id="fr" >
 	         <input type="hidden" name="bno" value="${vo.bno }">
+	         <!-- 페이지 처리정보(page/pageSize) -->
 	         
 	    </form>
 	

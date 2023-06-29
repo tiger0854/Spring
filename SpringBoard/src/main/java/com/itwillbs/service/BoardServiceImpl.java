@@ -52,6 +52,13 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getBoardListPage(PageVO vo) throws Exception {
 		return bdao.getBoardListPage(vo);
 	}
+
+	@Override
+	public int getTotalCount() throws Exception {
+		return bdao.getTotalCount();
+	}
+	
+	
 	
 	
 	

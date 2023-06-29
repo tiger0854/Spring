@@ -58,7 +58,8 @@ public class BoardController {
 		// 리스트 페이지로 이동
 		//return "/board/success";
 		//return "redirect:/board/listALL?test=12345"; //Model객체(@ModelAttrbute)
-		return "redirect:/board/listALL";
+		//return "redirect:/board/listALL";
+		return "redirect:/board/listPage";
 	}
 	
 	// http://localhost:8088/board/listALL
@@ -173,32 +174,33 @@ public class BoardController {
 		return "redirect:/board/listALL";
 	}
 	
-		// http://localhost:8088/board/listPage?page=3&pageSize=20
-		// 게시판 글 목록
-		@RequestMapping(value = "/listPage",method = RequestMethod.GET )
-		public String listPageGET(PageVO vo,HttpSession session,Model model,@ModelAttribute("result") String result) throws Exception{
-			logger.debug(" listPageGET() 호출 ");
-			logger.debug(" result : "+result);
-			
-			// 서비스 - 페이징처리된 리스트정보 가져오기
-			List<BoardVO> boardList = service.getBoardListPage(vo);
-			logger.debug("boardList : "+boardList);
-			
-			// 페이징처리 (하단부) 정보저장객체
-			PageMaker pm = new PageMaker();
-			pm.setPageVO(vo);
-			pm.setTotalCount(155648);
-			
-			
-			// 조회수 체크 값
-			session.setAttribute("checkViewCnt", true);
-			
-			// 연결된 뷰페이지로 전달 (뷰-출력)
-			model.addAttribute("boardList", boardList);
-			model.addAttribute("pm", pm);
-			
-			return "/board/listALL";
-		}
+	// http://localhost:8088/board/listPage?page=3&pageSize=20
+	// 게시판 글 목록
+	@RequestMapping(value = "/listPage",method = RequestMethod.GET )
+	public String listPageGET(PageVO vo,HttpSession session,Model model,@ModelAttribute("result") String result) throws Exception{
+		logger.debug(" listPageGET() 호출 ");
+		logger.debug(" result : "+result);
+		
+		// 서비스 - 페이징처리된 리스트정보 가져오기
+		List<BoardVO> boardList = service.getBoardListPage(vo);
+		logger.debug("boardList : "+boardList);
+		
+		// 페이징처리 (하단부) 정보저장객체
+		PageMaker pm = new PageMaker();
+		pm.setPageVO(vo);
+		//pm.setTotalCount(155648);
+		pm.setTotalCount(service.getTotalCount());
+		
+		
+		// 조회수 체크 값
+		session.setAttribute("checkViewCnt", true);
+		
+		// 연결된 뷰페이지로 전달 (뷰-출력)
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pm", pm);
+		
+		return "/board/listALL";
+	}
 		
 	
 	
