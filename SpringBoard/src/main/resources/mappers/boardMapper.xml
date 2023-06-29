@@ -24,7 +24,9 @@
 	        resultMap="board">
 	    <![CDATA[    
 		select * from tbl_board 
-		where bno > 0
+		where bno > 0 
+		order by bno desc, regdate desc  
+		limit 0,10		
 		]]>
 	</select>
 	<!-- 글 목록 조회 -->

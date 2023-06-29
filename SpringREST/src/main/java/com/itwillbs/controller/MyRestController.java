@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,13 +47,14 @@ public class MyRestController {
 	// http://localhost:8088/controller/test3?name=itwill&tel=010-1234-1234
 	@RequestMapping(value = "/test3",method = RequestMethod.POST)
 	public /* @ResponseBody */ MemberVO test3(@RequestBody MemberVO vo) {
-		logger.debug("test3() 호출"); //@RequestBody : JSON 형태의 데이터를 객체 형태로 전환(타입전환)
+		logger.debug("test3() 호출");   // @RequestBody : JSON형태의 데이터를 객체형태로 전환(타입전환)
 		// MemberVO(객체)를 리턴시  JSON타입으로 처리 
 		// (+jackson-databind 라이브러리 추가)
 		
 //		MemberVO vo = new MemberVO();
 //		vo.setName("홍길동");
 //		vo.setTel("010-1234-1231");		
+		
 		return vo;
 	}
 	
@@ -107,15 +109,69 @@ public class MyRestController {
 		return " num : "+num;
 	}
 	
-	// ResponseEntity 객체 : REST 방식의 처리는 뷰페이지가 없음 
-	
-
+	// ResponseEntity 객체 : REST방식의 처리는 
+	//  뷰페이지가 없음. 페이지의 상태를 알기 어려움
+	// => 결과데이터 + HTTP 상태코드
+	// http://localhost:8088/controller/test7
 	@RequestMapping(value = "/test7",method = RequestMethod.GET)
 	public ResponseEntity<Void> test7() {
-		logger.debug(" test7() 호출 ");
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		logger.debug("test7() 호출");
+		
+		//return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 	
+	// http://localhost:8088/controller/test8
+	@RequestMapping(value = "/test8",method = RequestMethod.GET)
+	public ResponseEntity<String> test8() {
+		logger.debug("test8() 호출");
+//		if() {
+//			조건 만족  (데이터, 상태)
+//		}else {
+//			조건 불만족 (데이터, 상태)
+//		}
+		return new ResponseEntity<String>("ITWILL ERROR",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	// http://localhost:8088/controller/test9
+	@RequestMapping(value = "/test9",method = RequestMethod.GET)
+	public ResponseEntity<MemberVO> test9() {
+		logger.debug("test9() 호출");
+		
+		// 서비스 -> 메서드 호출결과 리턴
+		MemberVO vo = new MemberVO();
+		vo.setName("아이티윌");
+		vo.setTel("051-803-0909");
+		
+		//ResponseEntity<List<MemberVO>> respEntity = null;
+		//ResponseEntity<Map<String,Object>> respEntity = null;
+		ResponseEntity<MemberVO> respEntity = null;
+		if(vo != null) {
+			respEntity = new ResponseEntity<MemberVO>(vo,HttpStatus.OK);
+		}else {
+			respEntity = new ResponseEntity<MemberVO>(vo,HttpStatus.INTERNAL_SERVER_ERROR);			
+		}
+		
+//		return new ResponseEntity<MemberVO>(vo,HttpStatus.INTERNAL_SERVER_ERROR);
+		return respEntity;
+	}
+	
+	// http://localhost:8088/controller/test10
+	@RequestMapping(value = "/test10",method = RequestMethod.GET)
+	public ResponseEntity test10(){
+		System.out.println(" test10() 호출 ");
+		
+		HttpHeaders respHeaders = new HttpHeaders();
+		respHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		String msg = "";
+		   msg += "<script>";
+		   msg += " alert('에러 발생!!!');";
+		   //msg += " location.href='주소';";
+		   msg += "</script>";
+				
+		return  new ResponseEntity(msg,respHeaders,HttpStatus.BAD_REQUEST);
+	}
 	
 	
 	

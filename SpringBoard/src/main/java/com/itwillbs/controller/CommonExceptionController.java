@@ -16,6 +16,7 @@ public class CommonExceptionController {
 	@ExceptionHandler(Exception.class)
 	public String common(Model model,Exception e) {
 		logger.debug(" 예외발생!!! ");
+		logger.debug(""+e);
 		
 		model.addAttribute("err", e);
 		
