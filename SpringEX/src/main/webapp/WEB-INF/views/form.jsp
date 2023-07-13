@@ -12,9 +12,10 @@
 	  
 	  $("#btnAdd").click(function(){
 		  
-		  $('#divFile').append("<input type='file' name='file"+(cnt++)+"' accept='image/*' >");
+		  $('#divFile').append("<input type='file' name='file"+(cnt++)+"' accept='image/*'>");
 		  
 	  }); // btnAdd-click
+	  
   });
 
 </script>

@@ -12,8 +12,13 @@
 	      class="com.itwillbs.security.CustomAccessDeniedHandler"/>
 	<bean id="customLoginSuccess"
 	  class="com.itwillbs.security.CustomLoginSuccessHandler" />
+	
 	<bean id="customNoPassword" 
 	   class="com.itwillbs.security.CustomNoPasswordEncoder"/>
+	   
+<!-- 	<bean id="bcryptPasswordEncoder" -->
+<!-- 	     class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />    -->
+	   
 	
 	<security:http>
 		
@@ -56,6 +61,7 @@
 	  	 />	  
 	  
 	  	 <security:password-encoder ref="customNoPassword"/>	
+<!-- 	  	 <security:password-encoder ref="bcryptPasswordEncoder"/>	 -->
 	  
 	  </security:authentication-provider>    	
     	

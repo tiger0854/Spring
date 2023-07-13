@@ -173,13 +173,20 @@ public class FileController {
 			File thumbnail = new File("C:\\spring\\thumbnail"+"\\"+imgName+".png");
 			
 			if(downFile.exists()) {
-				//썸네일 파일 생성
 				thumbnail.getParentFile().mkdirs();
-//				Thumbnails.of(downFile).size(150, 150).outputFormat("png").toFile(thumbnail);;
+				// 썸네일 파일 생성
+//				Thumbnails.of(downFile)
+//							.size(150, 150)
+//							.outputFormat("png")
+//							.toFile(thumbnail);
 				
 				// 썸네일 정보 바로 출력
-				Thumbnails.of(downFile).size(150, 150).outputFormat("png").toOutputStream(out);
+				Thumbnails.of(downFile)
+				.size(150, 150)
+				.outputFormat("png")
+				.toOutputStream(out);
 			}
+			
 			
 			// 모든파일의 형태가 다운로드창으로 수행
 			// 파일 다운로드(전송)
